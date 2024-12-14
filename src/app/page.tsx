@@ -1,6 +1,7 @@
 'use client'
 
 import { ImageUploader } from "@/components/composites/image-uploader";
+import { jsPDF } from "jspdf";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -16,58 +17,33 @@ export default function Home() {
     reader.readAsDataURL(file)
   }
 
+  // todo: crop original image feature
+  // todo: make layout feature
+
+  const handleDownload = () => {
+    const img = new window.Image()
+    img.src = image!
+
+    img.onload = () => {
+      const width = 89;
+      const height = 127;
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: [width, height],
+      });
+
+      pdf.addImage(img, 'JPEG', 0, 0, width, height);
+      pdf.save('ID-photo.pdf');
+    }
+  }
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <ImageUploader onUpload={handleUploadImage} />
+        {!image && <ImageUploader onUpload={handleUploadImage} />}
+        {image && <><Image src={image} width={200} height={200} alt='image' /><button onClick={handleDownload}>Download</button></>}
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }

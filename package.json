@@ -6,7 +6,8 @@
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"biome:check": "biome check ./src",
+		"biome:fix": "biome check --write ./src"
 	},
 	"dependencies": {
 		"jspdf": "2.5.2",

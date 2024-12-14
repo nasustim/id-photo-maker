@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { FC } from "react"
+import type { FC } from "react";
 
 type Props = {
-  onUpload: (file: File) => void
-}
+	onUpload: (file: File) => void;
+};
 
 export const ImageUploader: FC<Props> = ({ onUpload }) => {
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (!file) return // todo: handle error
+	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files?.[0];
+		if (!file) return; // todo: handle error
 
-    onUpload(file)
-  }
+		onUpload(file);
+	};
 
-  return <input type='file' accept='image/*' onChange={onChange} />
-}
+	return <input type="file" accept="image/*" onChange={onChange} />;
+};

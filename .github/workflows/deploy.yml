@@ -35,6 +35,7 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
+      - run: bun i --production
       - name: Build with Next.js
         run: bun run build
       - name: Upload artifact

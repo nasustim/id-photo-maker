@@ -10,7 +10,9 @@ export default function Home() {
 		<div className="flex justify-items-center min-h-screen p-10 gap-1">
 			<main className="flex-[3] flex justify-items-center">
 				<div className="w-full h-full">
-					{predictedImage && <img src={predictedImage} className="w-full" alt='predicted' />}
+					{predictedImage && (
+						<img src={predictedImage} className="w-full" alt="predicted" />
+					)}
 				</div>
 			</main>
 			<nav className="flex-1 flex flex-col">

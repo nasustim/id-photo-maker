@@ -41,8 +41,8 @@ export default function Home() {
 	};
 
 	return (
-		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+		<div className="flex justify-items-center min-h-screen p-10 gap-1">
+			<main className="flex-[3]">
 				{!image && <ImageUploader onUpload={handleUploadImage} />}
 				{image && (
 					<>
@@ -53,6 +53,7 @@ export default function Home() {
 					</>
 				)}
 			</main>
+			<nav className="bg-slate-600 flex-1">fff</nav>
 		</div>
 	);
 }
